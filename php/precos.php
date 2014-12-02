@@ -1,11 +1,8 @@
-﻿<?php
-include('../config.php');
+﻿<?php include('../config.php');
 
-$vai = $_GET['onde'];
+$query = $conn->prepare('SELECT * FROM arremate WHERE produto = ?'); 
+$query->prepare(array($_GET['onde']));
 
-$sql = mysql_query('SELECT * FROM arremate WHERE produto = '.$vai.''); 
+$total = $query->rowCount();
 
-$total = mysql_num_rows($sql); 
-
-echo 'R$ '.number_format($total,2,",","."); 
-?>
+echo 'R$ '.number_format($total, 2, ",", ".");
