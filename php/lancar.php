@@ -1,13 +1,23 @@
-﻿<?php
-include('../config.php');
+﻿<?php include('../config.php');
 
-$cobranca = $_POST['cobranca'];
-$interessado = $_POST['interessado'];
-$produto = $_POST['produto'];
+$cobranca = 	$_POST['cobranca'];
+$interessado =  $_POST['interessado'];
+$produto = 		$_POST['produto'];
 
-mysql_query("INSERT INTO arremate VALUES('', '".$produto."', '".$interessado."')");
+$query = $conn->prepare('INSERT INTO arremate set produto=?, interessado=?');
 
-mysql_query("UPDATE usuarios SET lances = '".$cobranca."' WHERE login = '".$interessado."'");
+if ( ! $query->execute(array($produto, $interessado))) {
+	die('Error insert arremate.');
+}
 
-mysql_query("UPDATE regressiva SET produto = '".$produto."', interessado = '".$interessado."'");
-?>
+$query = $conn->prepare('UPDATE usuarios SET lances = ? WHERE login = ?');
+
+if ( ! $query->execute(array($cobranca, $interessado))) {
+	die('Error update usuario.')
+}
+
+$query = $conn->prepare('UPDATE regressiva SET produto = ?, interessado = ?');
+
+if ( ! $query->execute(array($produto, $interessado))) {
+	die('Error update regressiva.')
+}
