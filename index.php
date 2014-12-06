@@ -20,12 +20,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title><?php echo $user_email; ?></title>
+		<title><?php echo isset($user_email) ? $user_email : 'Leilão'; ?></title>
 		<link rel="stylesheet" href="css/estilo.css" />
 		
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script src="/js/contador.js"></script>
-		<script type="text/javascript" src="[url=http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js]http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js [/url]"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
@@ -55,9 +55,9 @@
 				$i = 0;
 				$sql = $conn->query('SELECT * FROM produtos');
 				
-				while ($linha = $sql->fetchAll(PDO::FETCH_ASSOC)): ?>
+				foreach ($sql->fetchAll(PDO::FETCH_ASSOC) as $linha): ?>
 
-					<?php if ($linha['disponivel'] == 2){ ?>
+					<?php if ($linha['disponivel'] == 2): ?>
 
 					<li class="lof">
 						<div class="fech"></div>
@@ -168,7 +168,7 @@
 					</li>
 					<?php endif ?>
 
-				<?php $i++; endwhile ?>
+				<?php $i++; endforeach ?>
 			</ul>
 		</div>
 		<!-- end Central -->
