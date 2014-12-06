@@ -13,11 +13,11 @@ if ( ! $query->execute(array($produto, $interessado))) {
 $query = $conn->prepare('UPDATE usuarios SET lances = ? WHERE login = ?');
 
 if ( ! $query->execute(array($cobranca, $interessado))) {
-	die('Error update usuario.')
+	die('Error update usuario.');
 }
 
 $query = $conn->prepare('UPDATE regressiva SET produto = ?, interessado = ?');
 
 if ( ! $query->execute(array($produto, $interessado))) {
-	die('Error update regressiva.')
+	die('Error update regressiva.');
 }

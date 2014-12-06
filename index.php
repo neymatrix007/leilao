@@ -6,13 +6,12 @@
 		$sqlv = $conn->prepare('SELECT * FROM usuarios WHERE login = ?');
 		$sqlv->execute(array($loginv));
 
-		while($linhav = $sqlv->fetchAll(PDO::FETCH_ASSOC)) {
+		$linhav = $sqlv->fetch(PDO::FETCH_ASSOC);
 
 			$user_id    = $linhav['id'];
 			$user_nome  = $linhav['nome'];
 			$user_email = $linhav['email'];
 			$user_login = $linhav['login'];
-		}
 	}
 ?>
 

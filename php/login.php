@@ -24,9 +24,9 @@
 			$senha = $_POST['senha'];
 
 			$query = $conn->prepare('SELECT * FROM usuarios WHERE login = ? and senha = ?');
-			$execute = $query->execute(array($_POST['login'], $_POST['senha']));
+			$query->execute(array($_POST['login'], $_POST['senha']));
 
-			if ($execute->rowCount()) {
+			if ($query->rowCount()) {
 
 				$_SESSION['login'] = $_POST['login'];
 				$_SESSION['senha'] = $_POST['senha'];
